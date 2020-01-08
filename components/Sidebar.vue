@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar{
-    box-shadow: 2px 0px 3px 0px rgba(50, 50, 50, 0.36);
+    
     min-height: 100vh;
 
     &__nav{

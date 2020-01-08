@@ -22,12 +22,9 @@ export default {
   loading: { color: '#fff' },
 
   css: [
-    '@/node_modules/bootstrap/dist/css/bootstrap.min.css'
-    
+    '@/node_modules/bootstrap/dist/css/bootstrap.min.css',
   ],
-  /*
-  ** Plugins to load before mounting the App
-  */
+
   plugins: [
   ],
   /*
@@ -35,11 +32,8 @@ export default {
   */
   buildModules: [
   ],
-  /*
-  ** Nuxt.js modules
-  */
+
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa'
   ],
@@ -53,9 +47,9 @@ export default {
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
+    styleResources: {
+      scss: './assets/mixins/mixin.scss'
+    },
     extend (config, ctx) {
     }
   }

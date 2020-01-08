@@ -1,20 +1,19 @@
 <template>
-    <div class="row">
+    <div>
                     <!-- .col -->
                     <div id="balance" class="col-md-12 col-lg-6 col-sm-12 ">
-                        <div class="white-box" style="display: flex;align-items:center;justify-content: space-between;">
+                        <div class="white-box">
                             <h3 class="box-title">USD</h3>
-                            <h3 class="box-title balance_usd"></h3>
-                            <button data-toggle="modal" data-target="#exampleModal"
-                                class="btn btn-danger">Withdrawal</button>
+                            <h3 class="box-title balance_usd">0</h3>
+                            <button class="button-custom">Withdrawal</button>
                         </div>
 
-                        <div class="white-box" style="display: flex;align-items:center;justify-content: space-between;">
+                        <div class="white-box">
                             <h3 class="box-title">Tencent</h3>
-                            <h3 class="box-title balance_token"></h3>
+                            <h3 class="box-title balance_token">0</h3>
                             <div>
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#deposit">Deposit</button>
-                            <button style="margin-left: 10px;" class="btn btn-danger sell">Sell</button>
+                                <button class="button-custom" >Deposit</button>
+                            <button class="button-custom">Sell</button>
                             </div>
                         </div>
                     </div>
@@ -23,3 +22,37 @@
                     <!-- /.col -->
                 </div>
 </template>
+
+<style lang="scss" scoped>
+.white-box{
+    justify-content: space-between;
+
+    .button-custom{
+       @include custom-button;
+        
+        &:not(:first-of-type){
+            margin-left: 15px
+        }
+    }
+
+    .box-title{
+        font-size: 22px;
+        font-weight: 500;
+    }
+}
+    .white-box + .white-box{
+        margin-top: 40px;
+    }
+</style>
+
+<script>
+export default {
+    head: {
+        title : 'Buy An Asset',
+        meta: [
+      {  name: 'description', content: 'Template with information about balances' }
+    ],
+    
+    }
+}
+</script>
