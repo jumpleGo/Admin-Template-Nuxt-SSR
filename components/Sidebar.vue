@@ -4,21 +4,21 @@
       <div class="sidebar-head" />
       <div class="sidebar__nav-links">
     
-          <nuxt-link to="/" class="sidebar__nav--link">
+          <nuxt-link exact to="/" active-class="active" class="sidebar__nav--link">
             Invest
           </nuxt-link>
     
-          <nuxt-link to="/BuyAnAsset" class="sidebar__nav--link">
+          <nuxt-link to="/BuyAnAsset" active-class="active" class="sidebar__nav--link">
             Buy an asset
           </nuxt-link>
       
       
-          <nuxt-link to="/YourAsset" class="sidebar__nav--link">
+          <nuxt-link to="/YourAsset" active-class="active" class="sidebar__nav--link">
             Your assets
           </nuxt-link>
        
        
-          <nuxt-link to="/Contact" class="sidebar__nav--link">
+          <nuxt-link to="/Contact" active-class="active" class="sidebar__nav--link">
             Contact
           </nuxt-link>
         
@@ -65,4 +65,14 @@ export default {
     }
 
 }
+.active{
+  background: rgba(0, 0, 0, 0.027); 
+}
 </style>
+
+<script>
+export default {
+  
+
+}
+</script>

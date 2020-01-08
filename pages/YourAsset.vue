@@ -45,3 +45,15 @@
         border-radius: 4px;
     }
 </style>
+
+<script>
+export default {
+    head: {
+        title: 'Your Assets',
+        meta: [{
+            name: 'description',
+            content: 'Sell your tokens'
+        }],
+    }
+}
+</script>
