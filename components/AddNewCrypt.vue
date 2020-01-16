@@ -1,32 +1,27 @@
 <template>
-    <div class="add-new-crypt">
-        <img class="add-new-crypt__img" :src="ImgUrl(src)" alt="">
-    </div>
+  <div class="add-new-crypt">
+    <p>Add...</p>
+  </div>
 </template>
 
-<script>
-export default {
-    props:{
-        src: String
-    },
-  methods:{
-      ImgUrl(src){
-        return require('@/assets/' + this.src);
-      }
+<style lang="scss" scpoed>
+.add-new-crypt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  border: 3px dashed #bbbbbb;
+  border-radius: 6px;
+  padding: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+  p {
+    font-size: 22px;
+    margin: 0;
+    color: #bbbbbb;
+    padding: 0;
   }
 }
-</script>
-
-<style lang="scss" scpoed>
-    .add-new-crypt{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        &__img{
-        width: 40px;
-        height: 40px;
-    }
-    }
-
-    
 </style>

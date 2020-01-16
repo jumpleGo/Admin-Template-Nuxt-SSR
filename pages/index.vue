@@ -1,105 +1,136 @@
 <template>
-<div>
-    <div id="second-step" class="row index">
-        <div v-for="crypt in crypts" :key="crypt.name" class="col-lg-2 col-sm-4 col-xs-6  col-lg-offset-2 box">
-            <div class="white-box analytics-info" >
-                 <h3 class="box-title">{{crypt.name}}</h3>
-                <img :src="getUrl(crypt.src)" alt="">
-            </div>
-        </div>
-
+  <div>
+    <h2>Your Crypto Portfolio</h2>
+    <div id="second-step" class="index container">
+      <div class="row">
+        <small-card
+          v-for="(crypt, index) in crypts"
+          :key="index"
+          :cryptInfo="crypt"
+          class="col-lg-2 col-sm-4 col-xs-6 col-md-3 box"
+          @mouseenter="showCloseButton(index)"
+          @mouseleave="hideCloseButton(index)"
+          
+        >
+      <close-button @click.native="deleteItem(index)" class="delete"/>
+        </small-card>
+        
+        <add-new-crypt
+          class="col-lg-2 col-md-3 col-sm-4 col-xs-6  box"
+          @click.native="show = true"
+        />
+      </div>
     </div>
-
-    <add-new-crypt @click.native="show = true"  class="add-new-crypt-button" :src="'buttons/plus.png'" />
-    <details-pop-up @closeModal="closeModal" @addData="addData" v-if="show === true" class="details-pop-up" />
-</div>
+<transition name="slide-fade">
+    <details-pop-up
+      v-if="show === true"
+      class="details-pop-up"
+      @closeModal="closeModal"
+    />
+</transition>
+  </div>
 </template>
 
 <script>
-import AddNewCrypt from '@/components/AddNewCrypt.vue'
-import DetailsPopUp from '@/components/DetailsPopUp.vue'
+import CloseButton from "@/components/CloseButton.vue"
+import {mapGetters} from "vuex"
+import AddNewCrypt from "@/components/AddNewCrypt.vue"
+import DetailsPopUp from "@/components/DetailsPopUp.vue"
+import SmallCard from "@/components/SmallCard.vue"
 export default {
-    components: {
+  components: {
     AddNewCrypt,
-    DetailsPopUp
+    DetailsPopUp,
+    SmallCard,
+    CloseButton
   },
-  data(){
-    return{
+  data() {
+    return {
       show: false,
-      crypts:[
-          {
-              name: 'Bitcoin',
-              src: 'BTC.png'
-          },
-          {
-              name: 'Ethereum',
-              src: 'ETH.png'
-          },
-          {
-              name: 'Ripple',
-              src: 'XRP.png'
-          }]
-      }
-    },
-  
-  methods:{
-      closeModal(data){
-          this.show = data;
-      },
-      getUrl(src){
-          return require('@/assets/cryptos/'+ src)
-      },
-      addData(data){
-          this.crypts.push(data);
-          console.log(data)
-      }
-  }
+      crypts: [],
+    }
+  },
 
+
+  created() {
+    this.crypts = this.$store.getters['crypt/getCryptAdd'];
+  },
+
+ 
+
+
+
+  methods: {
+    closeModal(data) {
+      this.show = data
+    },
+    deleteItem(index){
+      this.crypts.splice(index, 1) 
+    },
+   
+    showCloseButton(index) {
+      this.crypts[index].showClose = true
+    },
+    hideCloseButton(index) {
+      this.crypts[index].showClose = false
+    },
+    
+    
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.box{
-    margin-top: 20px;
+.box {
+  margin-top: 20px;
+  position: relative;
 }
-    .white-box{
-       padding: 15px 10px;
 
-        &:hover{
-         cursor: pointer;
-        }
-        h3{
-            font-size: 22px;
-            margin-right: 15px;
-        }
 
-        img{
-            width: 30px;
-            height: 30px;
-        }
-        
-    }
+.index {
+  position: relative;
+}
+.add-new-crypt-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  @include custom-button();
+  padding: 20px;
+  border-radius: 50%;
+  z-index: 1;
+}
 
-    .index{
-        position: relative;
-    }
-    .add-new-crypt-button{
+.details-pop-up {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: #f5f5f5;
+  box-shadow: -3px -2px 6px 0px rgba(0, 0, 0, 0.13),
+    3px 2px 6px 0px rgb(255, 255, 255);
+  z-index: 2;
+}
+
+.delete {
     position: absolute;
-    bottom: 30px;
-    right: 30px;
-    @include custom-button();
-    padding: 20px;
-    border-radius: 50%;
-    z-index: 1;
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: auto;
   }
 
-    .details-pop-up{
-    position: fixed;
-    top: 0;
-    right: 0;
-    background:  #f5f5f5;
-    box-shadow:  -3px -2px 6px 0px rgba(0, 0, 0, 0.13), 3px 2px 6px 0px rgb(255, 255, 255);
-    z-index: 2;
-  }
+.show {
+  display: block;
+}
 
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .1s ease-out;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
 </style>
