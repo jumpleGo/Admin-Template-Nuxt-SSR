@@ -1,43 +1,39 @@
 <template>
-    <div class="white-box analytics-info">
+  <div class="white-box analytics-info">
     <h3 class="box-title">
-        {{ cryptInfo.name }}
+      {{ cryptInfo.name }}
     </h3>
     <img :src="getUrl(cryptInfo.src)" alt="" >
-    <slot></slot>
-    </div>
+    <slot />
+  </div>
 </template>
 
 <script>
 export default {
-    name: "SmallCard",
-    props:[
-        'cryptInfo'
-    ],
-    data(){
-        return{
-          showClose: false
-        }
-    },
-    methods:{
-    deleteItem(){
-       this.$emit("deleteItem")
+  name: "SmallCard",
+  props: ["cryptInfo"],
+  data() {
+    return {
+      showClose: false
+    }
+  },
+  methods: {
+    deleteItem() {
+      this.$emit("deleteItem")
     },
 
     getUrl(src) {
       return require("@/assets/cryptos/" + src)
-    },
-    
     }
+  }
 }
 </script>
 
-<style lang="scss" >
-    .white-box {
-  padding: 15px 10px;
+<style lang="scss" scoped>
+.white-box {
   position: relative;
-
-  
+  display: flex;
+  align-items: center;
 
   &:hover {
     cursor: pointer;
@@ -49,7 +45,7 @@ export default {
 
   img {
     width: 30px;
-    height: 30px;
+    height: auto;
   }
 }
 </style>

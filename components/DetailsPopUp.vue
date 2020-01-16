@@ -12,16 +12,24 @@
       Add your info
     </h3>
 
-    <form class="details-pop-up__form" @submit.prevent>
-      <select @change="addSrc" v-model="data.name" required class="details-pop-up__form--input">
+    <form class="details-pop-up__form" @submit.prevent="addData()">
+      <select
+        v-model="data.name"
+        required
+        class="details-pop-up__form--input"
+        @change="addSrc"
+      >
         <option disabled value="">
           Выберите один из вариантов
         </option>
-        <option v-for="( cryptocurrency, index ) in cryptocurrencyes" :key="index">
+        <option
+          v-for="(cryptocurrency, index) in cryptocurrencyes"
+          :key="index"
+        >
           {{ cryptocurrency.name }}
         </option>
       </select>
-      <button @click="addData()" class="details-pop-up__form--button">
+      <button class="details-pop-up__form--button">
         Add
       </button>
     </form>
@@ -29,33 +37,31 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
-      
-      data:{
+      data: {
         name: "",
-        src: "",
+        src: ""
       },
-     
+
       cryptocurrencyes: [
-      {name :'BTC'},
-      {name :'ETH'}, 
-      {name :'XRP'},
-      {name :'ETC'},
-      {name :'LTC'},
-      {name :'BNB'}
-    ],
+        { name: "BTC" },
+        { name: "ETH" },
+        { name: "XRP" },
+        { name: "ETC" },
+        { name: "LTC" },
+        { name: "BNB" }
+      ]
     }
   },
- 
+
   methods: {
     closePopUp() {
       this.$emit("closeModal", (this.show = false))
     },
-    addSrc(){
-        switch (this.data.name) {
+    addSrc() {
+      switch (this.data.name) {
         case "BTC":
           this.data.src = "BTC.png"
           break
@@ -82,8 +88,8 @@ export default {
           break
       }
     },
-    addData() {      
-      this.$store.dispatch("crypt/addData",this.data)
+    addData() {
+      this.$store.dispatch("crypt/addData", Object.assign({}, this.data))
     }
   }
 }

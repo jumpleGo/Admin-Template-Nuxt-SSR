@@ -5,9 +5,9 @@
         Sell Tokens
       </h3>
       <p>token price 9$</p>
-      <input class="total_tokens" type="number" placeholder="total tokens" >
+      <input class="total_tokens" type="number" placeholder="total tokens">
 
-      <input class="total_price" placeholder="total price" disabled >
+      <input class="total_price" placeholder="total price" disabled>
 
       <button class="button-custom">
         Sell

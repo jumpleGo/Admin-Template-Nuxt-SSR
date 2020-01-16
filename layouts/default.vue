@@ -1,9 +1,9 @@
 <template>
   <div class="basic-template">
     <sidebar class="col-2 basic-template__sidebar" />
-   <keep-alive>
-    <nuxt class="col-10 basic-template__pages" />
-   </keep-alive>
+    <keep-alive>
+      <nuxt class="col-10 basic-template__pages" />
+    </keep-alive>
   </div>
 </template>
 <script>
