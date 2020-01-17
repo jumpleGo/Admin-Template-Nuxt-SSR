@@ -32,7 +32,7 @@ export default {
   }
 }
 
-.white-box {
+.white-box  {
   box-shadow: 3px 2px 6px 0px rgba(0, 0, 0, 0.13),
     -3px -2px 6px 0px rgb(255, 255, 255);
   background: #f5f5f5;

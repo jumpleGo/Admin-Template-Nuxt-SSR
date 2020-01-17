@@ -37,14 +37,18 @@
 </template>
 
 <script>
+
 export default {
+  name: "DelailsPopUp",
   data() {
     return {
+      
       data: {
         name: "",
-        src: ""
+        src: "",
+        key: '',
+        price: ''
       },
-
       cryptocurrencyes: [
         { name: "BTC" },
         { name: "ETH" },
@@ -63,25 +67,31 @@ export default {
     addSrc() {
       switch (this.data.name) {
         case "BTC":
-          this.data.src = "BTC.png"
+          this.data.src = "BTC.png";
+          this.data.key = 1;
           break
         case "ETH":
           this.data.src = "ETH.png"
+          this.data.key = 2;
           break
         case "XRP":
           this.data.src = "XRP.png"
+          this.data.key = 3;
           break
 
         case "BNB":
           this.data.src = "BNB.png"
+          this.data.key = 4;
           break
 
         case "LTC":
           this.data.src = "LTC.png"
+          this.data.key = 5;
           break
 
         case "ETC":
           this.data.src = "ETC.png"
+          this.data.key = 6;
           break
 
         default:
@@ -91,7 +101,10 @@ export default {
     addData() {
       this.$store.dispatch("crypt/addData", Object.assign({}, this.data))
     }
-  }
+  },
+
+  
+
 }
 </script>
 

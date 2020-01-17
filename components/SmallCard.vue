@@ -1,51 +1,94 @@
 <template>
-  <div class="white-box analytics-info">
-    <h3 class="box-title">
-      {{ cryptInfo.name }}
-    </h3>
-    <img :src="getUrl(cryptInfo.src)" alt="" >
-    <slot />
-  </div>
+<div class="white-box">
+    <div class="analytics-info">
+        <h3 class="box-title">
+            {{ cryptInfo.name }}
+        </h3>
+        <img :src="getUrl(cryptInfo.src)" alt="">
+    </div>
+
+    <close-button @click.native="deleteItem" class="delete" />
+    <span ref="price">{{ this.price }} ₽</span>
+</div>
 </template>
 
 <script>
+import axios from 'axios';
+import CloseButton from "@/components/CloseButton.vue"
 export default {
-  name: "SmallCard",
-  props: ["cryptInfo"],
-  data() {
-    return {
-      showClose: false
-    }
-  },
-  methods: {
-    deleteItem() {
-      this.$emit("deleteItem")
+    name: "SmallCard",
+    props: ["cryptInfo"],
+    components: {
+        CloseButton
     },
 
-    getUrl(src) {
-      return require("@/assets/cryptos/" + src)
+    data() {
+        return {
+            showClose: false,
+            price: ''
+        }
+    },
+
+    methods: {
+        deleteItem() {
+            this.$store.dispatch('crypt/deleteItem', this.cryptInfo.key);
+        },
+
+        getUrl(src) {
+            return require("@/assets/cryptos/" + src)
+        },
+        getPrice() {
+            setInterval(()=>{
+               axios.get(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${this.cryptInfo.name}&tsyms=RUB`).then(res => {
+                    this.price = eval(`res.data.${this.cryptInfo.name}.RUB`);
+                })
+            }, 1000
+            );
+
+            
+            // if(oldData > this.price){
+            //       this.$refs.price.style.background = "red"    
+            // }else if(oldData < this.price){
+            //   this.$refs.price.style.background = "green"  
+            // }
+        }
+    },
+    mounted() {
+        this.getPrice();
     }
-  }
 }
 </script>
 
 <style lang="scss" scoped>
+.analytics-info {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    h3 {
+        font-size: 22px;
+        margin-right: 15px;
+    }
+
+    img {
+        width: 30px;
+        height: auto;
+    }
+}
+
 .white-box {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+}
 
-  &:hover {
-    cursor: pointer;
-  }
-  h3 {
-    font-size: 22px;
-    margin-right: 15px;
-  }
-
-  img {
-    width: 30px;
-    height: auto;
-  }
+.delete {
+    position: absolute;
+    top: 0;
+    right: 7px;
 }
 </style>

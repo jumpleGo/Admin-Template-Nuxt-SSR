@@ -5,15 +5,14 @@
       <div class="row">
         <small-card
           v-for="(crypt, index) in crypts"
-          :key="index"
+          :key="crypt.key"
           :crypt-info="crypt"
           class="col-lg-2 col-sm-4 col-xs-6 col-md-3 box"
           @mouseenter="showCloseButton(index)"
           @mouseleave="hideCloseButton(index)"
-        >
-          >
-          <close-button class="delete" @click.native="deleteItem(index)" />
-        </small-card>
+        
+        />
+        
 
         <add-new-crypt
           class="col-lg-2 col-md-3 col-sm-4 col-xs-6  box"
@@ -32,8 +31,7 @@
 </template>
 
 <script>
-import CloseButton from "@/components/CloseButton.vue"
-import { mapGetters } from "vuex"
+
 import AddNewCrypt from "@/components/AddNewCrypt.vue"
 import DetailsPopUp from "@/components/DetailsPopUp.vue"
 import SmallCard from "@/components/SmallCard.vue"
@@ -42,12 +40,12 @@ export default {
     AddNewCrypt,
     DetailsPopUp,
     SmallCard,
-    CloseButton
+    
   },
   data() {
     return {
       show: false,
-      crypts: this.cryptAdd
+      crypts: [],
     }
   },
 
@@ -59,10 +57,8 @@ export default {
     closeModal(data) {
       this.show = data
     },
-    deleteItem(index) {
-      this.crypts.splice(index, 1)
-    },
-
+   
+   
     showCloseButton(index) {
       this.crypts[index].showClose = true
     },
@@ -75,13 +71,10 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-  margin-top: 20px;
   position: relative;
+  margin: 20px 10px;
 }
 
-.box + .box {
-  margin-left: 15px;
-}
 
 .index {
   position: relative;
@@ -107,11 +100,7 @@ export default {
   z-index: 2;
 }
 
-.delete {
-  position: absolute;
-  top: 0;
-  right: 7px;
-}
+
 
 .show {
   display: block;
