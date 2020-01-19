@@ -17,7 +17,7 @@
         v-model="data.name"
         required
         class="details-pop-up__form--input"
-        @change="addSrc"
+        @change="addSrc(); getPrice();"
       >
         <option disabled value="">
           Выберите один из вариантов
@@ -37,8 +37,9 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
+  
   name: "DelailsPopUp",
   data() {
     return {
@@ -55,7 +56,9 @@ export default {
         { name: "XRP" },
         { name: "ETC" },
         { name: "LTC" },
-        { name: "BNB" }
+        { name: "BNB" },
+        { name: 'DASH'},
+        { name: "WAVES"}
       ]
     }
   },
@@ -93,13 +96,29 @@ export default {
           this.data.src = "ETC.png"
           this.data.key = 6;
           break
+        
+        case "DASH":
+          this.data.src = "dash.png"
+          this.data.key = 7;
+          break
+
+        case "WAVES":
+          this.data.src = "WAVES.png"
+          this.data.key = 8;
+          break
 
         default:
           break
       }
     },
+    getPrice(){
+       axios.get(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${this.data.name}&tsyms=USDT`).then(res => {
+        this.data.price = eval(`res.data.${this.data.name}.USDT`);
+      })
+    },
     addData() {
-      this.$store.dispatch("crypt/addData", Object.assign({}, this.data))
+      this.$store.dispatch("crypt/addData", Object.assign({}, this.data));
+     
     }
   },
 

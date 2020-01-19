@@ -4,11 +4,12 @@
         <h3 class="box-title">
             {{ cryptInfo.name }}
         </h3>
-        <img :src="getUrl(cryptInfo.src)" alt="">
+        <img :src="getUrl(cryptInfo.src)">
     </div>
 
     <close-button @click.native="deleteItem" class="delete" />
-    <span ref="price">{{ this.price }} ₽</span>
+    <span v-if="!this.price">{{ cryptInfo.price }} USDT</span>
+    <span v-if="this.price">{{ price }} USDT</span>
 </div>
 </template>
 
@@ -38,19 +39,11 @@ export default {
             return require("@/assets/cryptos/" + src)
         },
         getPrice() {
-            setInterval(()=>{
-               axios.get(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${this.cryptInfo.name}&tsyms=RUB`).then(res => {
-                    this.price = eval(`res.data.${this.cryptInfo.name}.RUB`);
+            setInterval(() => {
+                 axios.get(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${this.cryptInfo.name}&tsyms=USDT`).then(res => {
+                    this.price = eval(`res.data.${this.cryptInfo.name}.USDT`);
                 })
-            }, 1000
-            );
-
-            
-            // if(oldData > this.price){
-            //       this.$refs.price.style.background = "red"    
-            // }else if(oldData < this.price){
-            //   this.$refs.price.style.background = "green"  
-            // }
+            }, 4000)
         }
     },
     mounted() {

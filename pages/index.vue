@@ -5,12 +5,9 @@
       <div class="row">
         <small-card
           v-for="(crypt, index) in crypts"
-          :key="crypt.key"
+          :key="index"
           :crypt-info="crypt"
-          class="col-lg-2 col-sm-4 col-xs-6 col-md-3 box"
-          @mouseenter="showCloseButton(index)"
-          @mouseleave="hideCloseButton(index)"
-        
+          class="col-lg-2 col-sm-4 col-xs-6 col-md-3 box"        
         />
         
 
@@ -42,6 +39,7 @@ export default {
     SmallCard,
     
   },
+ 
   data() {
     return {
       show: false,
