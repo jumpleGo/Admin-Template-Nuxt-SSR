@@ -9,7 +9,7 @@
 
     <close-button @click.native="deleteItem" class="delete" />
     <span v-if="!this.price">{{ cryptInfo.price }} USDT</span>
-    <span v-if="this.price">{{ price }} USDT</span>
+    <span v-else>{{ price }} USDT</span>
 </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
 
     methods: {
         deleteItem() {
-            this.$store.dispatch('crypt/deleteItem', this.cryptInfo.key);
+            this.$store.commit('crypt/filteringState', this.cryptInfo.key);
         },
 
         getUrl(src) {

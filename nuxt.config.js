@@ -36,7 +36,7 @@ export default {
   buildModules: [],
   
   
-  modules: ["@nuxtjs/axios", "@nuxtjs/pwa"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/pwa", 'cookie-universal-nuxt'],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

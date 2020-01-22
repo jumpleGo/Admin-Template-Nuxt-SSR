@@ -1,14 +1,29 @@
+
+
 export const state = () => ({
-  cryptAdd: []
+  cryptAdd :  []
 })
 
 export const mutations = {
   setCrypt(state, payload) {
-    state.cryptAdd.push(payload)
+    state.cryptAdd.push(payload);
+    
+    this.$cookies.set('users-crypt', state.cryptAdd, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7
+    });
+  },
+  setCookies(state, payload){
+    state.cryptAdd = payload
   },
   filteringState(state, payload) {
     let index = state.cryptAdd.findIndex(el => el.key === payload);
-    state.cryptAdd.splice(index, 1)
+    state.cryptAdd.splice(index, 1);
+    
+    this.$cookies.set('users-crypt', state.cryptAdd, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7
+    })
   }
 }
 
@@ -18,11 +33,6 @@ export const actions = {
   }, data) {
     commit("setCrypt", data)
   },
-  deleteItem({
-    commit
-  }, data) {
-    commit("filteringState", data)
-  }
 }
 
 export const getters = {

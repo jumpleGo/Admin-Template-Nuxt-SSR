@@ -39,7 +39,7 @@ export default {
     SmallCard,
     
   },
- 
+ middleware: ['getCookie'],
   data() {
     return {
       show: false,
@@ -57,12 +57,12 @@ export default {
     },
    
    
-    showCloseButton(index) {
-      this.crypts[index].showClose = true
-    },
-    hideCloseButton(index) {
-      this.crypts[index].showClose = false
-    }
+    // showCloseButton(index) {
+    //   this.crypts[index].showClose = true
+    // },
+    // hideCloseButton(index) {
+    //   this.crypts[index].showClose = false
+    // }
   }
 }
 </script>
