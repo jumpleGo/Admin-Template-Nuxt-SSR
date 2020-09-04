@@ -19,7 +19,7 @@
     "bootstrap": "^4.4.1",
     "component-cache": "^1.0.0",
     "cookie-universal-nuxt": "^2.1.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "nuxt": "^2.0.0",
     "nuxt-sass-resources-loader": "^2.0.5",
     "sass-loader": "^8.0.0"
